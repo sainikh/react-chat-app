@@ -37,7 +37,7 @@ function body() {
          </div>
 
      
-        <div className="flex-auto bg-green-300 relative">
+        <div className="flex-auto h-screen bg-green-300 relative">
           <div className= "flex flex-col h-auto p-4 m-2 bg-slate-200"> Tech Point </div> 
           <div className= "flex flex-col h-[32rem] p-4 m-2  bg-slate-200 overflow-auto"> 
           <div className='flex flex-col space-y-4'>
