@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* .editor {
+    box-sizing: border-box;
+    margin: 25px;
+    width: 50%;
+    height: auto;
+    border: 1px solid #ddd;
+    cursor: text;
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 1em;
+    box-shadow: inset 0px 1px 8px -3px #ABABAB;
+    background: #9c2d2d;
+}
+
+.editor :global(.public-DraftEditor-content) {
+    min-height: 140px;
+}
+
+.superFancyBlockquote {
+    color: #999;
+    font-family: 'Hoefler Text', Georgia, serif;
+    font-style: italic;
+    text-align: center;
+} */
