@@ -9,8 +9,8 @@ function App() {
    
       <div>
         <Nav/>
-       {/* <Login/> */}
-       <Body/>
+       <Login/>
+       {/* <Body/> */}
        {/* <Sildebar/> */}
     </div>
   );
