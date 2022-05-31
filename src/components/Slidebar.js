@@ -56,7 +56,9 @@ class Sidebar extends React.Component {
                 // this.onChange = editorState => this.setState({editorState});
               }
            
-        
+         Dot = ()=> {
+           
+        }
         
               onChange = (editorState) => {
                 const contentState = editorState.getCurrentContent();
@@ -113,7 +115,7 @@ class Sidebar extends React.Component {
                         <div className=" hover:bg-gray-600 p-1 rounded-md"><SideBarIcon icon={<BsEmojiSmile size="20"/>}/></div>
                         <div className=" hover:bg-gray-600 p-1 rounded-md"><SideBarIcon icon={<HiAtSymbol size="20"/>}/></div>
                         <div className=" flex flex-auto w-4/5"></div> 
-                        <div className=" bg-green-900 w-20 p-1 rounded-md"><SideBarIcon  icon={<AiOutlineSend size="20"/>}/></div>
+                        <div className=" bg-green-900 w-20 p-1 rounded-md"><a href="#"></a><SideBarIcon  icon={<AiOutlineSend size="20"/>}/></div>
                         </div >
 
                         </div>

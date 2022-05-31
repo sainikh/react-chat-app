@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
-import Body from './components/body'
+import Chatroom from './components/chatroom';
+
 
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter ,Routes,Route } from 'react-router-dom';
@@ -12,7 +13,7 @@ ReactDOM.render(
     <BrowserRouter>
     <Routes>
       <Route path = "/" element={<App/>}/>
-      <Route path = "/chatroom" element={<Body/>}/>
+      <Route path = "/chatroom" element={<Chatroom/>}/>
     </Routes>
     </BrowserRouter>
   </React.StrictMode>,
