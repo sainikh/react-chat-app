@@ -1,7 +1,5 @@
-import {BrowserRouter, Route, Routes } from 'react-router-dom'
+
 import './body.css';
-import Login from  './Login'
-import Logout from './Logout'
 import Sildebar from './Slidebar'
 
 function body() {
@@ -65,8 +63,8 @@ function body() {
             </div>
 
           
-            <div className='grid justify-items-end bg-slate-200'>
-            <img src={process.env.PUBLIC_URL+"/google-logo-png.png"} width="100"  alt="second logo" />
+            <div className='grid justify-items-end bg-slate-200 '>
+            <img className='rounded-full ' src="https://lh3.googleusercontent.com/a-/AOh14GhnzO5AnXbkgbiMu0Ga1OPTa6TAZyPFicmtc1JaIw=s96-c" width="40" alt='df' />
             <div className= " rounded-2xl p-3  bg-slate-400 max-w-md ">Im fine how are you doing.asd adsd sdas ds asdsa das dasdasdasdasd sads ddhi this is sai nikhil A  asdsd sd adasdsa dad sd asd asd sad as das das d  d as dsa dassdsadas das dasd asd sad asd sd asd sadas d asd asd as </div>
             </div>
 

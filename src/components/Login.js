@@ -1,21 +1,24 @@
-import { render } from '@testing-library/react';
+
+
 import './login.css';
-import Body from './body'
+import Body from './body';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';     
 import 'firebase/compat/auth';
+import Nav from './nav';
+
 
 import {useAuthState} from 'react-firebase-hooks/auth'
 import {useCollectionData} from 'react-firebase-hooks/firestore';
 
 firebase.initializeApp({
-   apiKey: "AIzaSyAuRGkM_Cen2Ik1ZV1f37W2B_QaoD1JSJQ",
-    authDomain: "react-chat-app-2-24e00.firebaseapp.com",
-    projectId: "react-chat-app-2-24e00",
-    storageBucket: "react-chat-app-2-24e00.appspot.com",
-    messagingSenderId: "244843804677",
-    appId: "1:244843804677:web:76ecb9ad7c5607aa15c46c",
-    measurementId: "G-HWLZ55EQ4X"
+   apiKey: process.env.REACT_APP_API_KEY,
+   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+   projectId: process.env.REACT_APP_PROJECT_ID,
+   storageBucket: process.env.REACT_APP_STORAGEBUCKET,
+   messagingSenderId: process.env.REACT_APP_MESSAGINGS_SENDER_ID,
+   appId: process.env.REACT_APP_API_ID,
+   measurementId: process.env.REACT_APP_MEASUREMENT_ID
 })
 
 const auth = firebase.auth();
@@ -25,12 +28,12 @@ function Login()
 {
       
 const [user] = useAuthState(auth);
-
-
+console.log(process.env.REACT_APP_API_KEY)
    return(
       
             <section>
-               {user?<Body/>:<SignIn/>}
+               <Nav name = {user}/>
+               {user ?<Body/>:<SignIn/>}
             </section>
            
            
@@ -47,6 +50,7 @@ function SignIn()
 
 
    return(<div> 
+        
        <div className='  bg-gray-700 h-screen w-fill text-white'>
          <div>
             <br/>
@@ -58,7 +62,7 @@ function SignIn()
             <div className=' p-5 text-center text-xl '><p>Please create your google account </p></div>
             <div className=' p-1 text-center text-xl '><p>if not present </p></div>
             </div>
-            
-   </div></div>);
+   </div>
+   </div>);
 }
 export default Login;
