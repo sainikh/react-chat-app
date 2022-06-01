@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* div.sent {
+    display: flex;
+    justify-content: start;
+}
+
+div.received {
+    display: flex;
+    padding-left: 10px;
+    justify-content: end;
+} */
+
+.received {
+    @apply space-x-3 flex flex-row bg-slate-200 p-2;
+}
+
+.sent {
+    @apply flex flex-row-reverse space-x-3 space-x-reverse bg-slate-200 p-5;
+}

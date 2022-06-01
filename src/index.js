@@ -2,18 +2,26 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
-import Body from './components/body';
+import Slidebar from './components/Slidebar';
+import DJ from './components/Dj'
 
 
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter ,Routes,Route } from 'react-router-dom';
+
+
+
+
+
+
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
     <Routes>
       <Route path = "/" element={<App/>}/>
-      <Route path = "/body" element={<Body/>}/>
+      <Route path = "/dj" element={<DJ/>}/>
+      <Route path = "/send" element={<Slidebar/>}/>
     </Routes>
     </BrowserRouter>
   </React.StrictMode>,

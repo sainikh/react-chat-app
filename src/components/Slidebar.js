@@ -1,11 +1,11 @@
 import React from "react";
-import {Editor, EditorState, RichUtils,convertToRaw,convertFromRaw } from 'draft-js';
+import {Editor, EditorState, RichUtils,convertToRaw,convertFromRaw,getDefaultKeyBinding} from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import Parser from 'html-react-parser';
 import 'draft-js/dist/Draft.css';
 import editorstyles from './Slidebar.modle.css';
 import { AiOutlineSend} from "react-icons/ai";
-import { BsEmojiSmile } from "react-icons/bs";
+import { BsEmojiSmile,BsTextLeft } from "react-icons/bs";
 import { FaFileUpload} from "react-icons/fa";
 import { BiItalic,BiBold,BiCodeAlt,BiLink,BiCodeBlock} from "react-icons/bi";
 import { AiOutlineStrikethrough} from "react-icons/ai";
@@ -14,11 +14,26 @@ import { AiOutlineLink} from "react-icons/ai";
 import { MdFormatListBulleted,MdFormatListNumbered} from "react-icons/md";
 import { HiAtSymbol} from "react-icons/hi";
 import { CompositeDecorator } from 'draft-js';
+import LinkPreview from './LinkPreview';
+import firebase from './firebase';   
 
 
+
+
+
+const auth = firebase.auth();
+const firestore = firebase.firestore();
 
 
 class Sidebar extends React.Component {
+
+  
+
+
+
+
+
+
 
     _onBoldClick() {
         this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, 'BOLD'));
@@ -32,14 +47,36 @@ class Sidebar extends React.Component {
       }
       _Unorderer(){
         this.setState({editorState: RichUtils.toggleBlockType(this.state.editorState,'unordered-list-item' )})
-        }
+        };
      _Orderdlist(){
         this.setState({editorState: RichUtils.toggleBlockType(this.state.editorState,'ordered-list-item' )}) }
-            toggleBlockType = (blockType) => {this.onChange(RichUtils.toggleBlockType(this.state.editorState, blockType));};
-    
+            
+      
+     __OnCode(){
+      this.onChange(RichUtils.toggleInlineStyle (this.state.editorState, 'CODE'));
+    }
+
+    _OnCodeBlock(){
+      this.setState({editorState: RichUtils.toggleBlockType(this.state.editorState,'code-block' )}) }
+       
+      _OnBlockQuote(){
+        this.setState({editorState: RichUtils.toggleBlockType(this.state.editorState,'blockquote' )}) }
+       
+        Send () 
+        {
+            const rawContentState = convertToRaw(this.state.editorState.getCurrentContent());
+         
+            const markup = draftToHtml(rawContentState);
+            <div>
+                {markup}
+            </div>
+        }
+      
 
             constructor(props) {
         
+            
+
 
                 super(props);
                 this.state = {editorState: EditorState.createEmpty()};
@@ -69,43 +106,57 @@ class Sidebar extends React.Component {
               }
         
               saveContent = (content) => {
+              
                 window.localStorage.setItem('content', JSON.stringify(convertToRaw(content)));
               }
         
-               Send =() =>
-              {
-                  const rawContentState = convertToRaw(EditorState.getCurrentContent());
-                  const markup = draftToHtml(rawContentState);
-                  <div>
-                      {markup}
-                  </div>
+             
+        
+              sendMessage = async (e) => {
+                e.preventDefault();
+            
+                const rawContentState = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
+                const rawcon= rawContentState;
+                const { uid, photoURL } = auth.currentUser;
+                const messagesRef = firestore.collection('messages');
+                await messagesRef.add({
+                  // text: formValue,
+                  data:rawcon,
+                  createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                  uid,
+                  photoURL
+                })
+            
               }
-                    
+
+
+
         
-        
-        
+              
         
                 render() {
                     return (<div >
-                       <div className=" bottom-0 left-0 h-fill   bg-zinc-900 p-2">
-            <div className="    rounded-xl bg-zinc-800  w-auto p-1 border-zinc-500 border-2" >
+                       <div className=" bottom-0 left-0 h-fill  bg-zinc-900  p-2">
+            <div className="    rounded-xl  w-auto p-1 bg-zinc-800 border-zinc-500 border-2" >
             <div className="  flex flex-row p-1 text-zinc-400 ">
                        
                         <button className=' hover:bg-gray-600 p-1 rounded-md'onClick={this._onBoldClick.bind(this)}><SideBarIcon icon={<BiBold size="18"/>}/></button>   
                          <button className=' hover:bg-gray-600 p-1 rounded-md' onClick={this._onItalic.bind(this)}><SideBarIcon icon={<BiItalic size="20"/>}/></button>
                          <button className='hover:bg-gray-600 p-1 rounded-md' onClick={this._onStrikeline.bind(this)}> <SideBarIcon icon={<AiOutlineStrikethrough size="20"/>}/></button>  
-                         <div className='hover:bg-gray-600 p-1  border-zinc-400'><SideBarIcon icon={<BiLink size="20"/>}/></div>
+                         <button className='hover:bg-gray-600 p-1 rounded-md' onClick={link}><SideBarIcon icon={<BiLink size="20"/>}/></button>
                          <button className='hover:bg-gray-600 p-1 rounded-md' onClick={this._Unorderer.bind(this)}> <SideBarIcon icon={<MdFormatListBulleted size="20"/>}/></button>    
                          <button className='hover:bg-gray-600 p-1 rounded-md' onClick={this._Orderdlist.bind(this)}><SideBarIcon icon={<MdFormatListNumbered size="20"/>}/></button>
-                        <div className='hover:bg-gray-600 p-1 rounded-md'><SideBarIcon icon={<BiCodeAlt size="20"/>}/></div>
-                        <div className='hover:bg-gray-600 p-1 rounded-md'><SideBarIcon icon={<BiCodeBlock size="20"/>}/></div>
+                         <button className='hover:bg-gray-600 p-1 rounded-md' onClick={this._OnBlockQuote.bind(this)}><SideBarIcon icon={<BsTextLeft size="20"/>}/></button>
+                   
+                         <button className='hover:bg-gray-600 p-1 rounded-md' onClick={this.__OnCode.bind(this)}><SideBarIcon icon={<BiCodeAlt size="20"/>}/></button>
+                        <button className='hover:bg-gray-600 p-1 rounded-md'  onClick={this._OnCodeBlock.bind(this)}><SideBarIcon icon={<BiCodeBlock size="20"/>}/></button>
                         </div>
                         <div className=" w-1/2 "> </div>
                         
                         <div className=" mx-3 flex p-1 flex-col  text-slate-500 w-full " data-placeholder=" Text here...">
-                        <div className={editorstyles.editor}>
-                        <Editor  editorState={this.state.editorState} onChange={this.onChange} />
-                        </div>
+                        <div onClick={scrollToBottom} className={editorstyles.editor}>
+                        <Editor   editorState={this.state.editorState} onChange={this.onChange} />
+                        </div>  
                         </div>
                                            
 
@@ -115,7 +166,7 @@ class Sidebar extends React.Component {
                         <div className=" hover:bg-gray-600 p-1 rounded-md"><SideBarIcon icon={<BsEmojiSmile size="20"/>}/></div>
                         <div className=" hover:bg-gray-600 p-1 rounded-md"><SideBarIcon icon={<HiAtSymbol size="20"/>}/></div>
                         <div className=" flex flex-auto w-4/5"></div> 
-                        <div className=" bg-green-900 w-20 p-1 rounded-md"><a href="#"></a><SideBarIcon  icon={<AiOutlineSend size="20"/>}/></div>
+                        <button className=" bg-green-900 w-20 p-1 rounded-md" onClick={this.sendMessage.bind(this)}><SideBarIcon  icon={<AiOutlineSend size="20"/>}/></button>
                         </div >
 
                         </div>
@@ -133,6 +184,23 @@ class Sidebar extends React.Component {
                         {icon}
                     </div>
                 );
+
+
+                const scrollToBottom = () =>{ 
+                  window.scrollTo({ 
+                    top: document.documentElement.scrollHeight, 
+                    behavior: 'smooth'
+                    /* you can also use 'auto' behaviour 
+                       in place of 'smooth' */
+                  }); }
+
+                
+
+function link()
+{
+  return(<div><LinkPreview/></div>);
+}
+
 
 
 
