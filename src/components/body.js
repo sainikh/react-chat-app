@@ -157,10 +157,11 @@ const editorState = EditorState.createWithContent(contentState);
     </div>
    
      
-      
-      <div className='grid justify-items-start bg-slate-200 '>
+      <div className= " rounded-full p-1  bg-slate-100">
+     </div>
+      <div className=' bg-slate-200 '>
         <div className=' bg-gray-800 p-2 invisible'>sa</div>
-            <div className= " rounded-2xl p-2 place-content-center bg-slate-400 max-w-md ">
+            <div className= " font-normal rounded-2xl p-2 place-content-center bg-slate-400 max-w-md ">
         <Editor editorState={editorState} readOnly={true} />
       </div>
       </div>
