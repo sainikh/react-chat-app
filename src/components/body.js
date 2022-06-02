@@ -33,7 +33,7 @@ function body() {
 
 function ChatRoom() {
   const messagesRef = firestore.collection('messages');
-  const query = messagesRef.orderBy('createdAt').limit(25);
+  const query = messagesRef.orderBy('createdAt');
 
   const [messages] = useCollectionData(query, { Filed: 'id' });
   const [formValue, setFormValue] = useState('');
@@ -42,7 +42,7 @@ function ChatRoom() {
   const sendMessage = async (e) => {
     e.preventDefault();
 
-    const { uid, photoURL } = auth.currentUser;
+    const { uid, photoURL,userName } = auth.currentUser;
 
     await messagesRef.add({
       text: formValue,
@@ -137,7 +137,7 @@ function ChatRoom() {
 
 function ChatMessage(props) {
   
-  const { text, uid, photoURL ,data} = props.message;
+  const { userName, uid, photoURL ,data} = props.message;
   const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
   
   // console.log(data);
@@ -148,13 +148,19 @@ const editorState = EditorState.createWithContent(contentState);
 
   return (<>
   <div className={`message ${messageClass}`}>
-    <div className='shrink w-8 sm:w-10 md:w-16  '> <img src={photoURL} alt='ssas' className=' rounded-full' width="50" /></div>
+    <div className='relative h-32 w-22 '>
+    <div className='flex absolute left-0 top-0 center'>
+    </div>
+    
+      <div className=' text-center text-[10px]'>{userName}</div>
+    <div className='shrink w-8 sm:w-10 md:w-16 items-center '> <img src={photoURL} alt='ssas' className=' rounded-full ' width="50" /></div>
+    </div>
+   
      
-      <div className= " rounded-full p-1  bg-slate-100">
-     </div>
-      <div className='grid justify-items-start bg-slate-200'>
-        
-            <div className= " rounded-2xl p-2  bg-slate-400 max-w-md ">
+      
+      <div className='grid justify-items-start bg-slate-200 '>
+        <div className=' bg-gray-800 p-2 invisible'>sa</div>
+            <div className= " rounded-2xl p-2 place-content-center bg-slate-400 max-w-md ">
         <Editor editorState={editorState} readOnly={true} />
       </div>
       </div>

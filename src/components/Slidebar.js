@@ -117,10 +117,12 @@ class Sidebar extends React.Component {
             
                 const rawContentState = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
                 const rawcon= rawContentState;
-                const { uid, photoURL } = auth.currentUser;
+                const { uid, photoURL,displayName } = auth.currentUser;
+                console.log(displayName);
                 const messagesRef = firestore.collection('messages');
                 await messagesRef.add({
                   // text: formValue,
+                  userName:displayName,
                   data:rawcon,
                   createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                   uid,
