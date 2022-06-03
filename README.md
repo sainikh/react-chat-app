@@ -2,7 +2,9 @@
 
 This is a react based chatting application. which usess firebase as data base and Draft js for storing and retriving of data 
 
+![image](https://user-images.githubusercontent.com/47454954/171961550-a17b2200-d03f-4722-92c6-35e24b3eb52b.png)
 
+# Click on gogle to login with google
 ### Live Example: [create-react-6sqscarsb-sainikh.vercel.app](https://create-react-6sqscarsb-sainikh.vercel.app/)
 
 
