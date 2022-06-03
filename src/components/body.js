@@ -76,9 +76,9 @@ function ChatRoom() {
              </div>
       
 
-     
-        <div className="flex-auto  bg-slate-700 h-fit">
-          <div className= "flex flex-col h-auto p-4 m-2 bg-zinc-900"> Welcome and Chat on</div> 
+
+        <div className=" flex-auto  bg-black h-fit">
+          <div className= "  flex flex-col h-auto p-4 m-2 bg-zinc-800 texte font-mono text-center"> Welcome and Chat on</div> 
           <div className= "flex flex-col h-fill sm:m-2  m-1 h-[40rem] bg-zinc-900  overflow-scroll"> 
           <div className='middle'>
           <div className='flex flex-col  space-y-10'>
@@ -152,8 +152,8 @@ const editorState = EditorState.createWithContent(contentState);
     
       <div className=' bg-zinc-900  '>
         
-            <div className= "my-3 font-normal rounded-2xl p-2 place-content-center bg-zinc-800  max-w-[120px] md:max-w-xl ">
-        <Editor editorState={editorState} readOnly={true} />
+            <div className= "my-3 font-normal rounded-2xl p-2 place-content-center bg-zinc-800  max-w-[120px] md:max-w-md lg:max-w-xl ">
+        <Editor editorState={editorState} readOnly={true}  />
       </div>
       </div>
     </div>

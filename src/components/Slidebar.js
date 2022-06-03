@@ -138,7 +138,7 @@ class Sidebar extends React.Component {
               
         
                 render() {
-                    return (<div className=" w-full overflow-x-auto  " >
+                    return (<div className=" shrink-0" >
                        <div className=" bottom-0 left-0 h-fill  bg-zinc-900  p-2">
             <div className="    rounded-xl  w-auto p-1 bg-zinc-800 border-zinc-500 border-2" >
             <div className="  flex flex-row p-1 text-zinc-400 ">
@@ -156,9 +156,9 @@ class Sidebar extends React.Component {
                         </div>
                         <div className=" w-1/2 "> </div>
                         
-                        <div className=" mx-2 flex p-1 flex-col  text-slate-500 w-full p-5 " data-placeholder=" Text here...">
+                        <div className="  flex p-1 flex-col  text-slate-500 w-full p-10 " data-placeholder=" Text here...">
                         <div onClick={scrollToBottom} className={editorstyles.editor}>
-                        <Editor   editorState={this.state.editorState} onChange={this.onChange} blockStyleFn={myBlockStyleFn}  />
+                        <Editor   editorState={this.state.editorState} onChange={this.onChange} blockStyleFn={myBlockStyleFn}  data-placeholder=" Text here..."  />
                         </div>  
                         </div>
                                            
