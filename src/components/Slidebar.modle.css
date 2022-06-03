@@ -26,3 +26,9 @@
     font-style: italic;
     text-align: center;
 } */
+
+.superFancyBlockquote {
+    border-left: 5px solid #f1f1f18b;
+    padding-left: 5px;
+    margin-left: 10px;
+}

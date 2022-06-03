@@ -113,7 +113,7 @@ class Sidebar extends React.Component {
              
         
               sendMessage = async (e) => {
-                e.preventDefault();
+               
             
                 const rawContentState = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
                 const rawcon= rawContentState;
@@ -127,17 +127,18 @@ class Sidebar extends React.Component {
                   createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                   uid,
                   photoURL
+                
                 })
             
               }
 
-
+              
 
         
               
         
                 render() {
-                    return (<div >
+                    return (<div className=" w-full overflow-x-auto  " >
                        <div className=" bottom-0 left-0 h-fill  bg-zinc-900  p-2">
             <div className="    rounded-xl  w-auto p-1 bg-zinc-800 border-zinc-500 border-2" >
             <div className="  flex flex-row p-1 text-zinc-400 ">
@@ -155,9 +156,9 @@ class Sidebar extends React.Component {
                         </div>
                         <div className=" w-1/2 "> </div>
                         
-                        <div className=" mx-3 flex p-1 flex-col  text-slate-500 w-full " data-placeholder=" Text here...">
+                        <div className=" mx-2 flex p-1 flex-col  text-slate-500 w-full p-5 " data-placeholder=" Text here...">
                         <div onClick={scrollToBottom} className={editorstyles.editor}>
-                        <Editor   editorState={this.state.editorState} onChange={this.onChange} />
+                        <Editor   editorState={this.state.editorState} onChange={this.onChange} blockStyleFn={myBlockStyleFn}  />
                         </div>  
                         </div>
                                            
@@ -203,6 +204,14 @@ function link()
   return(<div><LinkPreview/></div>);
 }
 
+
+
+function myBlockStyleFn(contentBlock) {
+  const type = contentBlock.getType();
+  if (type === 'blockquote') {
+    return 'superFancyBlockquote';
+  }
+}
 
 
 

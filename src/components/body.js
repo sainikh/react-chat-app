@@ -1,5 +1,5 @@
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState,useEffect } from 'react';
 import { Editor, EditorState, convertFromRaw } from "draft-js";
 import storedState from "./Stored.json";
 import './body.css';
@@ -32,11 +32,18 @@ function body() {
 
 
 function ChatRoom() {
+  const messagesEndRef = useRef(null);
+
   const messagesRef = firestore.collection('messages');
   const query = messagesRef.orderBy('createdAt');
 
   const [messages] = useCollectionData(query, { Filed: 'id' });
   const [formValue, setFormValue] = useState('');
+
+
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  };
 
 
   const sendMessage = async (e) => {
@@ -50,8 +57,9 @@ function ChatRoom() {
       uid,
       photoURL
     })
-
+   
   }
+  useEffect(scrollToBottom);
   return (<>
 
 
@@ -59,46 +67,30 @@ function ChatRoom() {
 <div className = "  flex  flex-row h-screen " >
         <div className=" hidden flex flex-col w-16 justify-between items-center p-4">
             <div className="flex flex-col space-y-2">
-            <a><div className=" rounded-full bg-gray-400 w-8 h-8"></div></a>
-            <a><div className=" rounded-full bg-gray-400 w-8 h-8"></div></a>
-            <a><div className=" rounded-full bg-gray-400 w-8 h-8"></div></a>
+            <a><div className=" rounded-full bg-gray-800 w-8 h-8"></div></a>
+            <a><div className=" rounded-full bg-gray-800 w-8 h-8"></div></a>
+            <a><div className=" rounded-full bg-gray-800 w-8 h-8"></div></a>
             </div>
           
            
              </div>
-        <div className ="hidden flex flex-col w-64 bg-amber-300 p-1">
-            <div>
-            <a><div className =" flex flex-col  bg-slate-800 p-3">asdasdasdasda sdad  asd  asd  ssadddas asdsd asdas </div></a>
-            </div>
-            <div>
-            <a><div className =" flex flex-col  bg-slate-800 p-3">asdasdasdasda sdad  asd  asd  ssadddas asdsd asdas </div></a>
-            </div>    
-            <div className="flex flex-col bg-slate-400 p-1">sdasdasdsdas sdasd sdas 
-            <a></a>
-           
-            </div>
-         </div>
+      
 
      
-        <div className="flex-auto bg-green-300 h-fit">
-          <div className= "flex flex-col h-auto p-4 m-2 bg-slate-200"> Welcome and Chat on</div> 
-          <div className= "flex flex-col h-fill sm:m-2  m-1 h-[40rem] bg-slate-200  overflow-scroll"> 
+        <div className="flex-auto  bg-slate-700 h-fit">
+          <div className= "flex flex-col h-auto p-4 m-2 bg-zinc-900"> Welcome and Chat on</div> 
+          <div className= "flex flex-col h-fill sm:m-2  m-1 h-[40rem] bg-zinc-900  overflow-scroll"> 
+          <div className='middle'>
           <div className='flex flex-col  space-y-10'>
-            {/* <div className='grid justify-items-start bg-slate-200'>
-            <img src={process.env.PUBLIC_URL+"/google-logo-png.png"} width="100"  alt="second logo" />
-            <div className= " rounded-2xl p-3  bg-slate-400 max-w-md ">hi this is sai nikhil A  asdsd sd adasdsa dad sd asd asd sad as das das d  d as dsa dassdsadas das dasd asd sad asd sd asd sadas d asd asd as </div>
-            </div>
-         
-
-            <div className='grid justify-items-end bg-slate-200'>
-            <img src={process.env.PUBLIC_URL+"/google-logo-png.png"} width="100"  alt="second logo" />
-            <div className= " rounded-2xl p-3  bg-slate-400 max-w-md ">Im fine how are you doing.asd adsd sdas ds asdsa das dasdasdasdasd sads ddhi this is sai nikhil A  asdsd sd adasdsa dad sd asd asd sad as das das d  d as dsa dassdsadas das dasd asd sad asd sd asd sadas d asd asd as </div>
-            </div> */}
+          
 
 
-<main>
-      { messages && messages.map((msg,id) => <ChatMessage key={id} message={msg} />)}
-    </main>
+          <main>
+            { messages && messages.map((msg,id) => <ChatMessage key={id} message={msg} />)}
+          </main>
+          </div>
+       
+    <div  ref={messagesEndRef}></div>
           
            
 
@@ -107,7 +99,7 @@ function ChatRoom() {
 
           
           </div>
-          <div className=" w-full "><Sildebar /></div>
+          <div className=" w-sm "><Sildebar /></div>
           {/* <div className='flex bg-fuchsia-500 p-4'></div> */}
           </div>
  
@@ -156,18 +148,18 @@ const editorState = EditorState.createWithContent(contentState);
     <div className='shrink w-8 sm:w-10 md:w-16 items-center '> <img src={photoURL} alt='ssas' className=' rounded-full ' width="50" /></div>
     </div>
    
-     
-      <div className= " rounded-full p-1  bg-slate-100">
-     </div>
-      <div className=' bg-slate-200 '>
-        <div className=' bg-gray-800 p-2 invisible'>sa</div>
-            <div className= " font-normal rounded-2xl p-2 place-content-center bg-slate-400 max-w-md ">
+
+    
+      <div className=' bg-zinc-900  '>
+        
+            <div className= "my-3 font-normal rounded-2xl p-2 place-content-center bg-zinc-800  max-w-[120px] md:max-w-xl ">
         <Editor editorState={editorState} readOnly={true} />
       </div>
       </div>
     </div>
     
   </>)
+  
 }
 
 
