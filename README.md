@@ -1,15 +1,13 @@
-# Create React App
+# React-Chat-app
 
-This directory is a brief example of a [Create React App](https://github.com/facebook/create-react-app) site that can be deployed to Vercel with zero configuration.
+This is a react based chatting application. which usess firebase as data base and Draft js for storing and retriving of data 
 
-## Deploy Your Own
 
-Deploy your own Create React App project with Vercel.
+### Live Example: [create-react-6sqscarsb-sainikh.vercel.app](https://create-react-6sqscarsb-sainikh.vercel.app/)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/create-react-app&template=create-react-app)
 
-_Live Example: https://create-react-template.vercel.app/_
-
+### Deploy 
+ Before deployment you should create a firebase database. then copy and paste the API key in the .env file and run npm start 
 ## Available Scripts
 
 In the project directory, you can run:
@@ -19,13 +17,12 @@ In the project directory, you can run:
 Runs the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes. You may also see any lint errors in the console.
+After login with gogle account you can find the messaging box created using Draft.js
+![image](https://user-images.githubusercontent.com/47454954/171960085-a512fda1-c1b9-415b-a50b-2cd2f075d87a.png)
 
-### `npm test`
+### Problems
+As of now the development for the top buttons in the message box are availabe but features like mention ,emoji,link privew and file upload are yet to be completed due to some Draft js dependency issues.
 
-Launches the test runner in the interactive watch mode. See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### All the theree problems will be complete with in monday.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.
-
-It correctly bundles React in production mode and optimizes the build for the best performance. The build is minified and the filenames include the hashes.
