@@ -25,6 +25,6 @@ After login with gogle account you can find the messaging box created using Draf
 ### Problems
 As of now the development for the top buttons in the message box are availabe but features like mention ,emoji,link privew and file upload are yet to be completed due to some Draft js dependency issues.
 
-### All the theree problems will be complete with in monday.
+### All the theree problems will be complete as soon as possible.
 
 
